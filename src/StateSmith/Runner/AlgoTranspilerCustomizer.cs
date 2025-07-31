@@ -27,6 +27,7 @@ public class AlgoTranspilerCustomizer
             algorithmId = AlgorithmId.Balanced2;
         }
 
+
         switch (algorithmId)
         {
             case AlgorithmId.Balanced1:
@@ -45,6 +46,14 @@ public class AlgoTranspilerCustomizer
         switch (transpilerId)
         {
             case TranspilerId.Default:
+            case TranspilerId.CodesysSt:
+                {
+                    sp.AddSingletonT<IGilTranspiler, StateSmith.Output.Gil.CodesysSt.GilToCodesysSt>();
+                    // Add additional service registrations if needed for Codesys ST
+                    algoBalanced1Settings.skipClassIndentation = false;
+                }
+                break;
+                
             case TranspilerId.C99:
                 {
                     sp.AddSingletonT<IGilTranspiler, GilToC99>();
